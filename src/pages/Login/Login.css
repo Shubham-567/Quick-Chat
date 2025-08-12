@@ -16,6 +16,7 @@
   flex-direction: column;
   gap: 20px;
   border-radius: 20px;
+  width: max(25vw, 400px);
 }
 .login-form h2 {
   font-weight: 500;
@@ -35,11 +36,16 @@
   border-radius: 4px;
   cursor: pointer;
 }
-.login-term {
+.login-term,
+.showPass {
   display: flex;
   gap: 5px;
   font-size: 12px;
   color: #808080;
+}
+.login-term *,
+.showPass * {
+  cursor: pointer;
 }
 .login-forgot {
   display: flex;
