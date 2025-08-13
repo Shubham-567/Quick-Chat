@@ -10,7 +10,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/chat' element={<Chat />} />
-          <Route path='/profile-update' element={<ProfileUpdate />} />
+          <Route path='/profile' element={<ProfileUpdate />} />
           <Route path='*' element={<p>Not Found 404</p>} />
         </Routes>
       </BrowserRouter>

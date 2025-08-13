@@ -29,7 +29,7 @@ const Login = () => {
           className='form-input'
         />
         <input
-          type={showPass ? "password" : "text"}
+          type={showPass ? "text" : "password"}
           placeholder='Password'
           required
           className='form-input'
