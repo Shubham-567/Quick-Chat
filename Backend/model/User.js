@@ -3,10 +3,10 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, unique: true },
-    fullname: { type: String, required: true },
     password: { type: String, required: true, minlength: 6 },
-    profilePic: { type: String, default: "" },
+    fullname: { type: String, required: true },
     bio: { type: String },
+    profilePic: { type: String, default: "" },
   },
   { timeseries: true }
 );
