@@ -50,7 +50,7 @@ export const signUp = async (req, res) => {
 };
 
 // Login a user
-const login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
