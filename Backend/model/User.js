@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema(
     bio: { type: String },
     profilePic: { type: String, default: "" },
   },
-  { timeseries: true }
+  { timestamps: true }
 );
 
 const User = mongoose.model("User", userSchema);

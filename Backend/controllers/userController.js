@@ -5,9 +5,9 @@ import bcrypt from "bcryptjs";
 
 // SignUp a new user
 export const signUp = async (req, res) => {
-  const { fullname, email, password, bio } = req.body;
-
   try {
+    const { fullname, email, password, bio } = req.body;
+
     if (!fullname || !email || !password || !bio) {
       return res
         .status(400)
@@ -79,11 +79,6 @@ export const login = async (req, res) => {
   }
 };
 
-// Controller to check if user is authenticated
-export const checkAuth = (req, res) => {
-  res.json({ success: true, user: req.user });
-};
-
 // Update user profile details
 export const updateProfile = async (req, res) => {
   try {
@@ -120,4 +115,9 @@ export const updateProfile = async (req, res) => {
     console.error(error.message);
     res.status(500).json({ success: false, message: error.message });
   }
+};
+
+// Controller to check if user is authenticated
+export const checkAuth = (req, res) => {
+  res.json({ success: true, user: req.user });
 };
