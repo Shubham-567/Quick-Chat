@@ -1,10 +1,12 @@
+import cloudinary from "../lib/cloudinary.js";
 import Message from "../model/Message.js";
 import User from "../model/User.js";
+import { io, userSocketMap } from "../server.js";
 
 // Get all users except logged in user
 export const getUsersForSidebar = async (req, res) => {
   try {
-    const userId = req.user._id;
+    const userId = req.user._id; // user from protectRoute middleware
 
     const filteredUsers = await User.find({ _id: { $ne: userId } }).select(
       "-password"
@@ -41,7 +43,7 @@ export const getMessages = async (req, res) => {
   try {
     const { id: selectedUserId } = req.params;
 
-    const myId = req.user._id;
+    const myId = req.user._id; // user from protectRoute middleware
 
     const messages = await Message.find({
       $or: [
@@ -70,6 +72,41 @@ export const markMessageAsSeen = async (req, res) => {
     await Message.findByIdAndUpdate(id, { seen: true });
 
     res.status(200).json({ success: true });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// Send message to selected user
+export const sendMessage = async (req, res) => {
+  try {
+    const { text, image } = req.body;
+
+    const receiverId = req.params.id;
+    const senderId = req.user._id; // user from protectRoute middleware
+
+    let imageUrl;
+    if (image) {
+      const uploadResponse = await cloudinary.uploader.upload(image);
+      imageUrl = uploadResponse.secure_url;
+    }
+
+    const newMessage = await Message.create({
+      senderId,
+      receiverId,
+      text,
+      image: imageUrl,
+    });
+
+    // emit the new message to the receiver's socket
+    const receiverSocketId = userSocketMap[receiverId];
+
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+    }
+
+    res.status(200).json({ success: true, newMessage });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ success: false, message: error.message });
