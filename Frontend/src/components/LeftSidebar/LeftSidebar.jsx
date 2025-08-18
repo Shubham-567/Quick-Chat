@@ -1,7 +1,12 @@
+import { Link } from "react-router-dom";
 import assets from "../../assets/assets";
 import "./LeftSidebar.css";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const LeftSidebar = () => {
+  const { logout } = useContext(AuthContext);
+
   return (
     <div className='ls'>
       <div className='ls-top'>
@@ -10,9 +15,11 @@ const LeftSidebar = () => {
           <div className='menu'>
             <img src={assets.menu_icon} alt='menu-icon' />
             <div className='sub-menu'>
-              <p>Edit Profile</p>
+              <p>
+                <Link to='/profile'>Edit Profile</Link>
+              </p>
               <hr />
-              <p>Logout</p>
+              <p onClick={() => logout()}>Logout</p>
             </div>
           </div>
         </div>

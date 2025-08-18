@@ -1,10 +1,34 @@
 import "./Login.css";
 import assets from "../../assets/assets";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
   const [currState, setCurrState] = useState("Sign Up");
   const [showPass, setShowPass] = useState(false);
+
+  const [fullname, setFullname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [bio, setBio] = useState("");
+  const [isDataSubmitted, setIsDataSubmitted] = useState(false);
+
+  const { login } = useContext(AuthContext);
+
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+
+    if (currState === "Sign Up" && !isDataSubmitted) {
+      setIsDataSubmitted(true);
+      return;
+    }
+
+    login(currState === "Sign Up" ? "signup" : "login", {
+      fullname,
+      email,
+      password,
+    });
+  };
 
   return (
     <div className='login'>
@@ -16,7 +40,9 @@ const Login = () => {
         {currState === "Sign Up" ? (
           <input
             type='text'
-            placeholder='Username'
+            placeholder='Fullname'
+            value={fullname}
+            onChange={(e) => setFullname(e.target.value)}
             required
             className='form-input'
           />
@@ -26,16 +52,20 @@ const Login = () => {
           type='email'
           required
           placeholder='Email address'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           className='form-input'
         />
         <input
           type={showPass ? "text" : "password"}
           placeholder='Password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           required
           className='form-input'
         />
 
-        <button type='submit'>
+        <button type='submit' onClick={(e) => onSubmitHandler(e)}>
           {currState === "Sign Up" ? "Create an Account" : "Login"}
         </button>
 
