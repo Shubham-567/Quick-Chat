@@ -17,14 +17,15 @@ export const AuthProvider = ({ children }) => {
   // check if user is authenticated and if so set user data and connect to socket
   const checkAuth = async () => {
     try {
-      const data = await axios.get("/api/auth/check");
+      const { data } = await axios.get("/api/auth/check");
 
       if (data.success) {
         setAuthUser(data.user);
         connectSocket(data.users);
       }
     } catch (error) {
-      toast.error(error.message);
+      console.error(error.response.data.message);
+      // toast.error("Please login to your account");
     }
   };
 
@@ -49,6 +50,54 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
+  // Login/signup function to handle user auth and socket connection
+  const login = async (state, credentials) => {
+    try {
+      const { data } = await axios.post(`/api/auth/${state}`, credentials);
+
+      if (data.success) {
+        setAuthUser(data.userData);
+        connectSocket(data.userData);
+
+        axios.defaults.headers.common["token"] = data.token;
+        setToken(data.token);
+
+        localStorage.setItem("token", data.token);
+
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
+    } catch {
+      toast.success(error.message);
+    }
+  };
+
+  // logout function to handle user logout and socket disconnect
+  const logout = () => {
+    localStorage.removeItem("token");
+    setToken(null);
+    setAuthUser(null);
+    setOnlineUsers([]);
+    axios.defaults.headers.common["token"] = null;
+    toast.success("Logged out successfully");
+    socket.disconnect();
+  };
+
+  // update profile functions to update user profile
+  const updateProfile = async (body) => {
+    try {
+      const { data } = await axios.put("/api/auth/update-profile", body);
+
+      if (data.success) {
+        setAuthUser(data.user);
+        toast.success("Profile updated successfully");
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common["token"] = token;
@@ -62,6 +111,9 @@ export const AuthProvider = ({ children }) => {
     authUser,
     onlineUsers,
     socket,
+    login,
+    logout,
+    updateProfile,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
