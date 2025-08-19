@@ -54,11 +54,12 @@
   outline: none;
 }
 .chat-msg {
-  height: calc(100% - 70px);
+  height: calc(100% - 80px);
   padding-bottom: 50px;
   overflow-y: scroll;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
+  margin-top: 12px;
 }
 .s-msg div img,
 .r-msg div img {

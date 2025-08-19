@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 export const ChatContext = createContext();
 
-export const ChatProvider = ({ Children }) => {
+export const ChatProvider = ({ children }) => {
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -100,11 +100,11 @@ export const ChatProvider = ({ Children }) => {
     selectedUser,
     unseenMessages,
     getUsers,
-    setMessages,
+    getMessages,
     sendMessage,
     setSelectedUser,
     setUnseenMessages,
   };
 
-  return <ChatContext.Provider value={value}>{Children}</ChatContext.Provider>;
+  return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
 };

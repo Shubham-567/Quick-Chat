@@ -1,11 +1,25 @@
 import { Link } from "react-router-dom";
 import assets from "../../assets/assets";
 import "./LeftSidebar.css";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { ChatContext } from "../../context/ChatContext";
 
 const LeftSidebar = () => {
-  const { logout } = useContext(AuthContext);
+  const { logout, onlineUsers } = useContext(AuthContext);
+  const { getUsers, users, setSelectedUser } = useContext(ChatContext);
+
+  const [input, setInput] = useState("");
+
+  const filteredUsers = input
+    ? users.filter((user) =>
+        user.fullname.toLowerCase().includes(input.toLowerCase())
+      )
+    : users;
+
+  useEffect(() => {
+    getUsers();
+  }, [onlineUsers]);
 
   return (
     <div className='ls'>
@@ -25,22 +39,37 @@ const LeftSidebar = () => {
         </div>
         <div className='ls-search'>
           <img src={assets.search_icon} alt='search-icon' />
-          <input type='text' placeholder='Search here...' />
+          <input
+            type='text'
+            placeholder='Search here...'
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
         </div>
       </div>
 
       <div className='ls-list'>
-        {Array(12)
-          .fill("")
-          .map((item, i) => (
-            <div key={i} className='friends'>
-              <img src={assets.profile_img} alt='profile-pic' />
+        {filteredUsers.length > 0 ? (
+          filteredUsers.map((user, i) => (
+            <div
+              key={i}
+              className='friends'
+              onClick={() => setSelectedUser(user)}>
+              <img
+                src={user.profilePic || assets.avatar_icon}
+                alt='profile-pic'
+              />
               <div>
-                <p>John Wick</p>
-                <span>Hello, How are you?</span>
+                <p>{user.fullname}</p>
+                <span>
+                  {onlineUsers.includes(user._id) ? "Online" : "Offline"}
+                </span>
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <p>No user found</p>
+        )}
       </div>
     </div>
   );

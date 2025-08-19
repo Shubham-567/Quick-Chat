@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [authUser, setAuthUser] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
-  const [socket, setsocket] = useState(null);
+  const [socket, setSocket] = useState(null);
 
   // check if user is authenticated and if so set user data and connect to socket
   const checkAuth = async () => {
@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
 
       if (data.success) {
         setAuthUser(data.user);
-        connectSocket(data.users);
+        connectSocket(data.user);
       }
     } catch (error) {
       console.error(error.response.data.message);
@@ -42,8 +42,7 @@ export const AuthProvider = ({ children }) => {
     });
 
     newSocket.connect();
-
-    setsocket(newSocket);
+    setSocket(newSocket);
 
     newSocket.on("getOnlineUsers", (userIds) => {
       setOnlineUsers(userIds);
