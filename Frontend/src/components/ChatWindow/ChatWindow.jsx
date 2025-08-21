@@ -1,0 +1,180 @@
+import { useContext, useEffect, useRef, useState } from "react";
+import assets from "../../assets/assets";
+import "./ChatWindow.css";
+import { ChatContext } from "../../context/ChatContext";
+import { AuthContext } from "../../context/AuthContext";
+import toast from "react-hot-toast";
+import { Info, Paperclip, Send } from "lucide-react";
+const ChatWindow = () => {
+  const { messages, selectedUser, sendMessage, getMessages } =
+    useContext(ChatContext);
+
+  const { authUser, onlineUsers } = useContext(AuthContext);
+
+  const [input, setInput] = useState("");
+
+  const chatContainerRef = useRef(null);
+
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
+
+    if (input.trim() === "") {
+      return null;
+    }
+
+    await sendMessage({ text: input.trim() });
+    setInput("");
+  };
+
+  const handleSendImage = async (e) => {
+    const file = e.target.files[0];
+
+    if (!file || !file.type.startsWith("image/")) {
+      toast.error("Select an image file");
+    }
+
+    const reader = new FileReader();
+
+    reader.onloadend = async () => {
+      await sendMessage({ image: reader.result });
+      e.target.value = "";
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  useEffect(() => {
+    if (selectedUser) {
+      getMessages(selectedUser._id);
+    }
+  }, [selectedUser]);
+
+  // scroll to new message
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTo({
+        top: chatContainerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [messages]);
+
+  return (
+    <section>
+      {selectedUser && (
+        <div className='chat-window'>
+          <div className='chat-header'>
+            <div className='left'>
+              <img
+                src={selectedUser.profilePic || assets.avatar_icon}
+                alt={selectedUser.fullname + "profile pic"}
+              />
+              <div className='user'>
+                <h2 className='name'>{selectedUser.fullname}</h2>
+                <p className='status'>
+                  {onlineUsers.includes(selectedUser._id) ? (
+                    <span>Online</span>
+                  ) : (
+                    <span className='text-muted'>Offline</span>
+                  )}
+                </p>
+              </div>
+            </div>
+
+            <Info className='size-6 text-muted hover:text-primary' />
+          </div>
+
+          <ul className='chat-container' ref={chatContainerRef}>
+            {messages.reverse().map((msg) => (
+              <li key={msg._id}>
+                {msg.senderId === authUser._id ? (
+                  <div className='outgoing-msg'>
+                    <div>
+                      <div>
+                        {msg.text ? (
+                          <p className='chat-bubble'>{msg.text}</p>
+                        ) : msg.image ? (
+                          <img
+                            src={msg.image}
+                            alt='image'
+                            className='msg-img'
+                          />
+                        ) : null}
+                      </div>
+                      <p className='date'>
+                        {new Date(msg.createdAt).toLocaleTimeString(undefined, {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                          hour12: true,
+                        })}
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className='incoming-msg'>
+                    <img
+                      src={selectedUser.profilePic}
+                      alt={selectedUser.fullname}
+                      className='user-profile-img'
+                    />
+                    <div>
+                      <div>
+                        {msg.text ? (
+                          <p className='chat-bubble'>{msg.text}</p>
+                        ) : msg.image ? (
+                          <img
+                            src={msg.image}
+                            alt='image'
+                            className='msg-img'
+                          />
+                        ) : null}
+                      </div>
+                      <p className='date'>
+                        {new Date(msg.createdAt).toLocaleTimeString(undefined, {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                          hour12: true,
+                        })}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+
+          <div className='chat-inputs'>
+            <label className='icon-btn group'>
+              <input
+                type='file'
+                accept='image/*'
+                className='hidden'
+                onChange={(e) => handleSendImage(e)}
+              />
+              <Paperclip className='size-5 group-hover:text-primary-foreground' />
+            </label>
+            <div className='input-container'>
+              <div className='input bg-card/40'>
+                <input
+                  type='text'
+                  placeholder='Type a message...'
+                  required
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSendMessage(e)}
+                />
+              </div>
+            </div>
+            <button
+              onClick={(e) => handleSendMessage(e)}
+              className='icon-btn group'>
+              <Send className='size-5 group-hover:text-primary-foreground' />
+            </button>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+};
+
+export default ChatWindow;

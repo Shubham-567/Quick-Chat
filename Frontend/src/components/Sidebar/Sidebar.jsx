@@ -103,7 +103,7 @@ function Sidebar() {
 
       <ul className='contacts'>
         {filteredUsers.map((user, index) => (
-          <li key={index} onClick={() => setSelectedUser(user._id)}>
+          <li key={index} onClick={() => setSelectedUser(user)}>
             <div className='contact-img'>
               <img
                 src={user.profilePic || assets.avatar_icon}

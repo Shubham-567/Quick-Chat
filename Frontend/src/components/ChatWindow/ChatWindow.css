@@ -1,0 +1,76 @@
+@reference "../../index.css";
+
+.chat-window {
+  @apply bg-background text-foreground flex flex-col justify-between min-h-screen gap-2;
+}
+
+.chat-header {
+  @apply flex justify-between items-center gap-4 w-full px-4 py-3 z-10 border-2 border-t-0 border-border;
+}
+
+.chat-header .left {
+  @apply flex items-center gap-2;
+}
+
+.chat-header img {
+  @apply size-12 rounded-full;
+}
+
+.chat-header .name {
+  @apply text-base font-medium;
+}
+
+.chat-header .status {
+  @apply text-sm text-primary;
+}
+
+.chat-window hr {
+  @apply border-none h-[2px] bg-border;
+}
+
+.chat-container {
+  @apply flex flex-col gap-4 p-4 text-sm max-h-[545px] grow overflow-y-scroll;
+}
+
+.chat-container .date {
+  @apply text-xs text-muted mt-2;
+}
+
+.chat-container .incoming-msg {
+  @apply flex items-end justify-start gap-2;
+}
+.chat-container .incoming-msg .user-profile-img {
+  @apply size-8 rounded-full relative bottom-2;
+}
+
+.chat-container .outgoing-msg {
+  @apply flex items-end justify-end gap-2 text-right;
+}
+
+.incoming-msg .chat-bubble {
+  @apply min-h-6 px-4 py-2 rounded-xl rounded-bl-none bg-card text-card-foreground;
+}
+
+.outgoing-msg .chat-bubble {
+  @apply min-h-6 px-4 py-2 rounded-xl rounded-br-none bg-primary text-primary-foreground;
+}
+
+.msg-img {
+  @apply max-w-100 h-full aspect-auto p-2 bg-card;
+}
+
+.incoming-msg .msg-img {
+  @apply bg-card rounded-2xl rounded-bl-none;
+}
+
+.outgoing-msg .msg-img {
+  @apply bg-card rounded-2xl rounded-br-none;
+}
+
+.chat-inputs {
+  @apply p-4 flex justify-between items-center gap-4 border-2 border-border;
+}
+
+.chat-inputs .icon-btn {
+  @apply p-2 bg-card rounded-lg border-2 border-border hover:bg-primary cursor-pointer;
+}

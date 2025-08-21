@@ -24,8 +24,8 @@
   @apply text-3xl md:text-4xl font-semibold flex items-center gap-2 md:gap-4 mb-8 md:mb-4;
 }
 
-.left p,
-.right p {
+.login-container .left p,
+.login-container .right p {
   @apply text-sm tracking-wider font-light text-muted;
 }
 
