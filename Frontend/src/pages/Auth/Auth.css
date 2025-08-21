@@ -1,0 +1,66 @@
+@reference "../../index.css";
+
+.login {
+  @apply flex justify-center items-center min-h-screen max-w-4xl mx-auto;
+}
+
+.login-container {
+  @apply bg-primary/1 text-card-foreground flex justify-center items-center border-2 border-border rounded-2xl;
+}
+
+.login-container .left,
+.right {
+  @apply p-10 min-w-1/2 flex flex-col justify-center min-h-140;
+}
+
+.right {
+  @apply border-l-2 border-border;
+}
+
+.left h2 {
+  @apply text-4xl font-semibold flex items-center gap-4 mb-4;
+}
+
+.left p,
+.right p {
+  @apply text-sm tracking-wider font-light text-muted;
+}
+
+.right h3 {
+  @apply text-xl font-semibold mb-1;
+}
+
+.right p {
+  @apply text-xs mb-4;
+}
+
+.right .auth-providers {
+  @apply flex justify-between items-center gap-2;
+}
+
+.right .auth-providers button {
+  @apply flex items-center gap-1 p-2 bg-card text-xs tracking-wider rounded-md cursor-pointer hover:bg-card/80;
+}
+
+.right .divider {
+  @apply flex justify-between items-center gap-1 w-full text-xs text-muted text-center my-4;
+}
+.right .divider hr {
+  @apply border-none h-[1px] w-full bg-border;
+}
+
+.right .input-wrapper {
+  @apply space-y-4;
+}
+
+.right .auth-switch {
+  @apply text-xs text-center text-muted m-0 pt-4;
+}
+
+.right .auth-switch button {
+  @apply pl-2 text-primary font-bold cursor-pointer hover:underline;
+}
+
+.show-pass {
+  @apply cursor-pointer text-muted hover:text-primary pr-2;
+}
