@@ -18,7 +18,7 @@ html {
   --color-foreground: hsl(0, 0%, 95%);
   --color-card: hsl(0, 0%, 14%);
   --color-card-foreground: hsl(0, 0%, 95%);
-  --color-popover: hsl(0, 0%, 20%);
+  --color-popover: hsl(0, 0%, 9%);
   --color-popover-foreground: hsl(0, 0%, 95%);
   --color-primary: hsl(158, 100%, 50%);
   --color-primary-foreground: hsl(158, 100%, 5%);

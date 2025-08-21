@@ -1,17 +1,16 @@
 import Chatbox from "../../components/Chatbox/Chatbox";
-import LeftSidebar from "../../components/LeftSidebar/LeftSidebar";
 import RightSidebar from "../../components/RightSidebar/RightSidebar";
+import Sidebar from "../../components/Sidebar/Sidebar";
 import "./Chat.css";
 
 const Chat = () => {
   return (
-    <div className='chat'>
-      <div className='chat-container'>
-        <LeftSidebar />
+    <section className='chat'>
+      <Sidebar />
+      {/*
         <Chatbox />
-        <RightSidebar />
-      </div>
-    </div>
+        <RightSidebar /> */}
+    </section>
   );
 };
 

@@ -1,0 +1,72 @@
+@reference "../../index.css";
+
+.sidebar {
+  @apply p-4 bg-card/40 min-h-screen;
+}
+
+.sidebar-header {
+  @apply flex justify-between items-center gap-4 mb-6 relative;
+}
+
+.sidebar-header .logo {
+  @apply text-2xl font-semibold flex items-center gap-2 tracking-wider;
+}
+
+.contacts {
+  @apply py-6;
+}
+
+.contacts li {
+  @apply hover:bg-card border-l-3 border-primary pl-2 flex items-center gap-4 py-3 rounded-r-lg cursor-pointer;
+}
+
+.contact-img {
+  @apply relative;
+}
+
+.contact-img img {
+  @apply size-12 bg-card rounded-full;
+}
+
+.contact-img .online-dot {
+  @apply size-2.5 bg-primary rounded-full absolute bottom-0 right-1;
+}
+
+.contact-name {
+  @apply text-base text-primary font-medium;
+}
+
+.contacts .last-msg {
+  @apply text-xs text-muted font-medium;
+}
+
+.option-menu {
+  @apply absolute top-10 right-0 bg-popover text-popover-foreground rounded-lg border-2 border-border min-w-60;
+}
+
+.option-menu .current-user {
+  @apply p-4 pb-0 flex items-center gap-3;
+}
+
+.current-user img {
+  @apply size-10 rounded-full;
+}
+
+.current-user h2 {
+  @apply text-base font-semibold;
+}
+.current-user span {
+  @apply text-sm text-muted;
+}
+
+.option-menu hr {
+  @apply border-none h-[2px] bg-border my-2;
+}
+
+.actions {
+  @apply p-2 pt-0;
+}
+
+.actions p {
+  @apply flex items-center gap-2 py-2 px-1 rounded-lg cursor-pointer text-base font-medium;
+}
