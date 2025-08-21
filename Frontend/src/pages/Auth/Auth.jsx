@@ -1,4 +1,3 @@
-import "./Auth.css";
 import {
   EyeIcon,
   EyeOffIcon,
@@ -10,11 +9,13 @@ import {
   MailIcon,
   UserIcon,
 } from "../../lib/Icons";
+import "./Auth.css";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import toast from "react-hot-toast";
 const Auth = () => {
   const [currState, setCurrState] = useState("Sign Up");
-  const [showPass, setShowPass] = useState(false);
+  const [isPassHidden, setIsPassHidden] = useState(true);
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -50,6 +51,13 @@ const Auth = () => {
           </p>
         </div>
         <div className='right'>
+          <div className='mx-auto md:hidden'>
+            <h2>
+              <LogoIcon className='text-primary size-8 md:size-10' />
+              Quick Chat
+            </h2>
+          </div>
+
           <h3>
             {currState === "SignUp" ? "Create Your Account" : "Welcome Back"}
           </h3>
@@ -60,10 +68,16 @@ const Auth = () => {
           </p>
 
           <div className='auth-providers'>
-            <button>
+            <button
+              onClick={() =>
+                toast.error("Sorry, This is option is not available right now.")
+              }>
               <GoogleIcon className='size-6' /> Continue with Google
             </button>
-            <button>
+            <button
+              onClick={() =>
+                toast.error("Sorry, This is option is not available right now.")
+              }>
               <GithubIcon className='size-6' />
               Continue with GitHub
             </button>
@@ -113,17 +127,17 @@ const Auth = () => {
               <div className='input'>
                 <LockIcon className='size-5 text-muted' />
                 <input
-                  type={showPass ? "password" : "text"}
+                  type={isPassHidden ? "password" : "text"}
                   id='password'
-                  placeholder={showPass ? "*********" : "Example-Pass@123"}
+                  placeholder={isPassHidden ? "*********" : "Example-Pass@123"}
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <div
                   className='show-pass'
-                  onClick={() => setShowPass(!showPass)}>
-                  {showPass ? (
+                  onClick={() => setIsPassHidden(!isPassHidden)}>
+                  {isPassHidden ? (
                     <EyeIcon className='size-5' />
                   ) : (
                     <EyeOffIcon className='size-5' />

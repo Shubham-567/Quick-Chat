@@ -1,11 +1,11 @@
 @reference "../../index.css";
 
 .login {
-  @apply flex justify-center items-center min-h-screen max-w-4xl mx-auto;
+  @apply flex justify-center items-center min-h-screen max-w-4xl mx-auto py-6 px-6;
 }
 
 .login-container {
-  @apply bg-primary/1 text-card-foreground flex justify-center items-center border-2 border-border rounded-2xl;
+  @apply bg-primary/2 text-card-foreground md:flex justify-center items-center border-2 border-border rounded-2xl;
 }
 
 .login-container .left,
@@ -16,9 +16,12 @@
 .right {
   @apply border-l-2 border-border;
 }
+.login-container .left {
+  @apply max-md:hidden;
+}
 
-.left h2 {
-  @apply text-4xl font-semibold flex items-center gap-4 mb-4;
+.login-container h2 {
+  @apply text-3xl md:text-4xl font-semibold flex items-center gap-2 md:gap-4 mb-8 md:mb-4;
 }
 
 .left p,
@@ -27,11 +30,11 @@
 }
 
 .right h3 {
-  @apply text-xl font-semibold mb-1;
+  @apply text-2xl font-semibold mb-1;
 }
 
 .right p {
-  @apply text-xs mb-4;
+  @apply text-sm mb-4;
 }
 
 .right .auth-providers {
@@ -39,7 +42,7 @@
 }
 
 .right .auth-providers button {
-  @apply flex items-center gap-1 p-2 bg-card text-xs tracking-wider rounded-md cursor-pointer hover:bg-card/80;
+  @apply flex items-center gap-2 p-2 bg-card text-xs tracking-wider rounded-md cursor-pointer hover:bg-card/80;
 }
 
 .right .divider {
@@ -53,8 +56,12 @@
   @apply space-y-4;
 }
 
+.right .primary-btn {
+  @apply mt-6;
+}
+
 .right .auth-switch {
-  @apply text-xs text-center text-muted m-0 pt-4;
+  @apply text-xs text-center text-muted m-0 pt-2;
 }
 
 .right .auth-switch button {
