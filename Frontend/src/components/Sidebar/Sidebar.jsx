@@ -8,8 +8,9 @@ import { LogOut, MoreHorizontal, Search } from "lucide-react"; // todo: clean Up
 import assets from "../../assets/assets";
 
 function Sidebar() {
-  const { logout, onlineUsers } = useContext(AuthContext);
-  const { getUsers, users, setSelectedUser } = useContext(ChatContext);
+  const { logout, onlineUsers, authUser } = useContext(AuthContext);
+  const { getUsers, users, setSelectedUser, selectedUser } =
+    useContext(ChatContext);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,10 +63,19 @@ function Sidebar() {
           {isMenuOpen && (
             <div className='option-menu'>
               <div className='current-user'>
-                <img src={assets.profile_img} alt='Current User Profile' />
+                <img
+                  src={authUser.profilePic || assets.profile_img}
+                  alt='Current User Profile'
+                />
                 <div>
-                  <h2 className='user'>Shubham Patil</h2>
-                  <span>Online</span>
+                  <h2 className='user'>{authUser.fullname}</h2>
+                  <div className='status'>
+                    {onlineUsers.includes(authUser._id) ? (
+                      <span className='text-primary'>Online</span>
+                    ) : (
+                      <span>Offline</span>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -103,7 +113,14 @@ function Sidebar() {
 
       <ul className='contacts'>
         {filteredUsers.map((user, index) => (
-          <li key={index} onClick={() => setSelectedUser(user)}>
+          <li
+            key={index}
+            onClick={() => setSelectedUser(user)}
+            className={
+              selectedUser && selectedUser._id === user._id
+                ? "border-primary bg-card"
+                : "border-border"
+            }>
             <div className='contact-img'>
               <img
                 src={user.profilePic || assets.avatar_icon}

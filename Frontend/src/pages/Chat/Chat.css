@@ -1,5 +1,5 @@
 @reference "../../index.css";
 
 .chat {
-  @apply min-h-screen grid grid-cols-2;
+  @apply min-h-screen w-full flex;
 }

@@ -1,7 +1,7 @@
 @reference "../../index.css";
 
 .sidebar {
-  @apply p-4 bg-card/40 min-h-screen;
+  @apply p-4 bg-card/40 min-h-screen w-1/4 border-r border-border;
 }
 
 .sidebar-header {
@@ -17,7 +17,7 @@
 }
 
 .contacts li {
-  @apply hover:bg-card border-l-3 border-primary pl-2 flex items-center gap-4 py-3 rounded-r-lg cursor-pointer;
+  @apply hover:bg-card/60 border-l-3 pl-2 flex items-center gap-4 py-3 rounded-r-lg cursor-pointer;
 }
 
 .contact-img {
@@ -41,7 +41,7 @@
 }
 
 .option-menu {
-  @apply absolute top-10 right-0 bg-popover text-popover-foreground rounded-lg border-2 border-border min-w-60;
+  @apply absolute top-10 right-0 bg-popover text-popover-foreground rounded-lg border-2 border-border min-w-60 z-10;
 }
 
 .option-menu .current-user {
@@ -55,7 +55,7 @@
 .current-user h2 {
   @apply text-base font-semibold;
 }
-.current-user span {
+.current-user .status {
   @apply text-sm text-muted;
 }
 
@@ -63,10 +63,10 @@
   @apply border-none h-[2px] bg-border my-2;
 }
 
-.actions {
+.option-menu .actions {
   @apply p-2 pt-0;
 }
 
 .actions p {
-  @apply flex items-center gap-2 py-2 px-1 rounded-lg cursor-pointer text-base font-medium;
+  @apply flex items-center gap-2 p-2 rounded-lg cursor-pointer text-base font-medium;
 }

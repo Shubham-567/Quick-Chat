@@ -59,10 +59,10 @@ const Auth = () => {
           </div>
 
           <h3>
-            {currState === "SignUp" ? "Create Your Account" : "Welcome Back"}
+            {currState === "Sign Up" ? "Create Your Account" : "Welcome Back"}
           </h3>
           <p>
-            {currState === "SignUp"
+            {currState === "Sign Up"
               ? "Join the next generations of chat."
               : "Login to continue your conversations."}
           </p>
@@ -90,7 +90,7 @@ const Auth = () => {
           </div>
 
           <div className='input-wrapper'>
-            {currState === "SignUp" && (
+            {currState === "Sign Up" && (
               <div className='input-container'>
                 <label htmlFor='fullname'>Full Name</label>
                 <div className='input'>
@@ -159,7 +159,7 @@ const Auth = () => {
                 <LoadingIcon className='size-4 text-primary-foreground animate-spin inline mr-2' />
                 Please Wait...
               </span>
-            ) : currState === "SignUp" ? (
+            ) : currState === "Sign Up" ? (
               "Create an Account"
             ) : (
               "Login"
@@ -167,14 +167,14 @@ const Auth = () => {
           </button>
 
           <p className='auth-switch'>
-            {currState === "SignUp"
+            {currState === "Sign Up"
               ? "Already have an account?"
               : "Don't have an account?"}
             <button
               onClick={() =>
-                setCurrState(currState === "SignUp" ? "Login" : "SignUp")
+                setCurrState(currState === "Sign Up" ? "Login" : "Sign Up")
               }>
-              {currState === "SignUp" ? "Login Here" : "Create Account"}
+              {currState === "Sign Up" ? "Login Here" : "Create Account"}
             </button>
           </p>
         </div>
