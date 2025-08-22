@@ -15,6 +15,8 @@ export const getUsersForSidebar = async (req, res) => {
     // count number of msg not seen
     const unseenMessages = {};
 
+    const lastMessages = {};
+
     const promises = filteredUsers.map(async (user) => {
       const messages = await Message.find({
         senderId: user._id,
@@ -25,11 +27,27 @@ export const getUsersForSidebar = async (req, res) => {
       if (messages.length > 0) {
         unseenMessages[user._id] = messages.length;
       }
+
+      const lastMessageDoc = await Message.findOne({
+        $or: [
+          { senderId: userId, receiverId: user._id },
+          { senderId: user._id, receiverId: userId },
+        ],
+      }).sort({ createdAt: -1 });
+
+      if (lastMessageDoc) {
+        lastMessages[user._id] = lastMessageDoc;
+      }
     });
 
     await Promise.all(promises);
 
-    res.json({ success: true, users: filteredUsers, unseenMessages });
+    res.json({
+      success: true,
+      users: filteredUsers,
+      unseenMessages,
+      lastMessages,
+    });
   } catch (error) {
     console.error(error.message);
     res.json({ success: false, message: error.message });

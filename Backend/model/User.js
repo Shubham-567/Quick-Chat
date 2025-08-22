@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true, minlength: 6 },
-    fullname: { type: String, required: true },
+    fullName: { type: String, required: true },
     bio: { type: String, default: "Hey, there i am using chat app" },
     profilePic: { type: String, default: "" },
   },

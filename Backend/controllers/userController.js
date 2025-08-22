@@ -6,9 +6,9 @@ import bcrypt from "bcryptjs";
 // SignUp a new user
 export const signUp = async (req, res) => {
   try {
-    const { fullname, email, password } = req.body;
+    const { fullName, email, password } = req.body;
 
-    if (!fullname || !email || !password) {
+    if (!fullName || !email || !password) {
       return res.json({ success: false, message: "Missing details" });
     }
 
@@ -24,7 +24,7 @@ export const signUp = async (req, res) => {
 
     // create new user in db
     const newUser = await User.create({
-      fullname,
+      fullName,
       email,
       password: hashedPass,
     });
@@ -50,8 +50,11 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
 
     const userData = await User.findOne({ email });
+    let isPassCorrect = null;
 
-    const isPassCorrect = await bcrypt.compare(password, userData.password);
+    if (userData) {
+      isPassCorrect = await bcrypt.compare(password, userData.password);
+    }
 
     if (!isPassCorrect) {
       return res.json({ success: false, message: "Invalid credentials" });
@@ -75,7 +78,7 @@ export const login = async (req, res) => {
 // Update user profile details
 export const updateProfile = async (req, res) => {
   try {
-    const { profilePic, bio, fullname } = req.body;
+    const { profilePic, bio, fullName } = req.body;
 
     const userId = req.user._id;
 
@@ -84,7 +87,7 @@ export const updateProfile = async (req, res) => {
     if (!profilePic) {
       updatedUser = await User.findById(
         userId,
-        { bio, fullname },
+        { bio, fullName },
         { new: true }
       );
     } else {
@@ -97,7 +100,7 @@ export const updateProfile = async (req, res) => {
         {
           profilePic: upload.secure_url,
           bio,
-          fullname,
+          fullName,
         },
         { new: true }
       );
