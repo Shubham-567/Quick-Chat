@@ -8,7 +8,7 @@ const ProfileUpdate = () => {
   const { authUser, updateProfile } = useContext(AuthContext);
 
   const [selectedImage, setSelectedImage] = useState(null);
-  const [name, setName] = useState(authUser.fullname);
+  const [name, setName] = useState(authUser.fullName);
   const [bio, setBio] = useState(authUser.bio);
 
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const ProfileUpdate = () => {
     e.preventDefault();
 
     if (!selectedImage) {
-      await updateProfile({ fullname: name, bio });
+      await updateProfile({ fullName: name, bio });
       navigate("/");
       return;
     }
@@ -26,7 +26,7 @@ const ProfileUpdate = () => {
     render.readAsDataURL(selectedImage);
     render.onload = async () => {
       const base64Image = render.result;
-      await updateProfile({ profilePic: base64Image, fullname: name, bio });
+      await updateProfile({ profilePic: base64Image, fullName: name, bio });
 
       navigate("/");
     };

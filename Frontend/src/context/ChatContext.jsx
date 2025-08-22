@@ -9,6 +9,7 @@ export const ChatProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [unseenMessages, setUnseenMessages] = useState({});
+  const [lastMessages, setLastMessages] = useState({});
 
   const { socket, axios } = useContext(AuthContext);
 
@@ -20,6 +21,7 @@ export const ChatProvider = ({ children }) => {
       if (data.success) {
         setUsers(data.users);
         setUnseenMessages(data.unseenMessages);
+        setLastMessages(data.lastMessages);
       }
     } catch (error) {
       toast.error(error.message);
@@ -68,6 +70,11 @@ export const ChatProvider = ({ children }) => {
         setMessages((prevMessages) => [...prevMessages, newMessage]);
 
         axios.put(`/api/messages/mark/${newMessage._id}`);
+
+        setUnseenMessages((prevUnseenMessages) => ({
+          ...prevUnseenMessages,
+          [newMessage.senderId]: 0, // all msg from this user are seen
+        }));
       } else {
         setUnseenMessages((prevUnseenMessages) => ({
           ...prevUnseenMessages,
@@ -99,6 +106,7 @@ export const ChatProvider = ({ children }) => {
     users,
     selectedUser,
     unseenMessages,
+    lastMessages,
     getUsers,
     getMessages,
     sendMessage,

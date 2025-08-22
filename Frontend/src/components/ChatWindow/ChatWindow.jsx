@@ -71,10 +71,10 @@ const ChatWindow = () => {
               <div className='left'>
                 <img
                   src={selectedUser.profilePic || assets.avatar_icon}
-                  alt={selectedUser.fullname + "profile pic"}
+                  alt={selectedUser.fullName + "profile pic"}
                 />
                 <div className='user'>
-                  <h2 className='name'>{selectedUser.fullname}</h2>
+                  <h2 className='name'>{selectedUser.fullName}</h2>
                   <div className='status'>
                     {onlineUsers.includes(selectedUser._id) ? (
                       <p className='flex items-center gap-1'>
@@ -126,8 +126,8 @@ const ChatWindow = () => {
                   ) : (
                     <div className='incoming-msg'>
                       <img
-                        src={selectedUser.profilePic}
-                        alt={selectedUser.fullname}
+                        src={selectedUser.profilePic || assets.avatar_icon}
+                        alt={selectedUser.fullName}
                         className='user-profile-img'
                       />
                       <div>

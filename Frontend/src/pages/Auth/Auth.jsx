@@ -35,6 +35,7 @@ const Auth = () => {
       email,
       password,
     });
+
   };
 
   return (
@@ -92,12 +93,12 @@ const Auth = () => {
           <div className='input-wrapper'>
             {currState === "Sign Up" && (
               <div className='input-container'>
-                <label htmlFor='fullname'>Full Name</label>
+                <label htmlFor='fullName'>Full Name</label>
                 <div className='input'>
                   <UserIcon className='size-5 text-muted' />
                   <input
                     type='text'
-                    id='fullname'
+                    id='fullName'
                     placeholder='Alex Ray'
                     required
                     value={fullName}

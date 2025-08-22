@@ -9,8 +9,14 @@ import assets from "../../assets/assets";
 
 function Sidebar() {
   const { logout, onlineUsers, authUser } = useContext(AuthContext);
-  const { getUsers, users, setSelectedUser, selectedUser } =
-    useContext(ChatContext);
+  const {
+    getUsers,
+    users,
+    setSelectedUser,
+    selectedUser,
+    unseenMessages,
+    lastMessages,
+  } = useContext(ChatContext);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,13 +24,13 @@ function Sidebar() {
 
   const filteredUsers = searchQuery
     ? users.filter((user) =>
-        user.fullname.toLowerCase().includes(searchQuery.toLowerCase())
+        user.fullName.toLowerCase().includes(searchQuery.toLowerCase())
       )
     : users;
 
   useEffect(() => {
     getUsers();
-  }, [onlineUsers]);
+  }, [onlineUsers, lastMessages]);
 
   // handle menu close when click outside of menu
   useEffect(() => {
@@ -68,7 +74,7 @@ function Sidebar() {
                   alt='Current User Profile'
                 />
                 <div>
-                  <h2 className='user'>{authUser.fullname}</h2>
+                  <h2 className='user'>{authUser.fullName}</h2>
                   <div className='status'>
                     {onlineUsers.includes(authUser._id) ? (
                       <span className='text-primary'>Online</span>
@@ -87,8 +93,8 @@ function Sidebar() {
                 </p>
                 <p
                   onClick={logout}
-                  className='hover:bg-destructive/10 group hover:text-destructive'>
-                  <LogOut className='size-5 text-muted group-hover:text-destructive' />
+                  className='hover:bg-destructive/10 group text-destructive'>
+                  <LogOut className='size-5' />
                   Logout
                 </p>
               </div>
@@ -121,18 +127,39 @@ function Sidebar() {
                 ? "border-primary bg-card"
                 : "border-border"
             }>
-            <div className='contact-img'>
-              <img
-                src={user.profilePic || assets.avatar_icon}
-                alt={"Alison-Profile-Pic"}
-              />
-              <span className='online-dot'></span>
+            <div className='flex items-center gap-2'>
+              <div className='contact-img'>
+                <img
+                  src={user.profilePic || assets.avatar_icon}
+                  alt={"Alison-Profile-Pic"}
+                />
+                {onlineUsers.includes(user._id) && (
+                  <span className='online-dot' />
+                )}
+              </div>
+
+              <div>
+                <p className='contact-name'>{user.fullName}</p>
+                <p className='last-msg'>
+                  {lastMessages[user._id]?.text || lastMessages[user._id]?.image
+                    ? lastMessages[user._id]?.senderId === authUser._id
+                      ? "You: "
+                      : user.fullName.split(" ")[0] + ": "
+                    : ""}
+                  {lastMessages[user._id]?.text
+                    ? lastMessages[user._id]?.text
+                    : lastMessages[user._id]?.image
+                    ? "Image"
+                    : "No messages yet"}
+                </p>
+              </div>
             </div>
 
-            <div>
-              <p className='contact-name'>{user.fullname}</p>
-              <p className='last-msg'>{user.bio}</p> {/** todo: add last msg */}
-            </div>
+            {unseenMessages[user._id] > 0 && (
+              <div class='unseenMessageCounter'>
+                <span className='mx-auto'>{unseenMessages[user._id]}</span>
+              </div>
+            )}
           </li>
         ))}
       </ul>

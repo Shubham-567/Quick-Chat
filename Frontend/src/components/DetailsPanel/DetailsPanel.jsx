@@ -19,12 +19,12 @@ const DetailsPanel = () => {
     <>
       {selectedUser && (
         <div className='details'>
-          <div className='profile flex flex-col items-center justify-center'>
+          <div className='profile'>
             <img
               src={selectedUser?.profilePic || assets.avatar_icon}
               alt='profile-img'
             />
-            <h3>{selectedUser.fullname}</h3>
+            <h3>{selectedUser.fullName}</h3>
             <p>{selectedUser.bio}</p>
           </div>
           <div className='media'>

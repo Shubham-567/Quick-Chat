@@ -56,7 +56,7 @@
 }
 
 .msg-img {
-  @apply max-w-100 h-full aspect-auto p-2 bg-card;
+  @apply max-w-100 min-w-100 min-h-50 h-full aspect-auto p-2 bg-card;
 }
 
 .incoming-msg .msg-img {
@@ -68,7 +68,7 @@
 }
 
 .chat-inputs {
-  @apply p-4 flex justify-between items-center gap-4 border-t-2 border-border;
+  @apply p-4 pb-6 flex justify-between items-center gap-4 border-t-2 border-border;
 }
 
 .chat-inputs .icon-btn {

@@ -13,11 +13,11 @@
 }
 
 .contacts {
-  @apply py-6;
+  @apply py-6 space-y-1;
 }
 
 .contacts li {
-  @apply hover:bg-card/60 border-l-3 pl-2 flex items-center gap-4 py-3 rounded-r-lg cursor-pointer;
+  @apply hover:bg-card/60 border-l-3 pl-2 flex justify-between items-start gap-4 py-3 rounded-r-lg cursor-pointer;
 }
 
 .contact-img {
@@ -69,4 +69,8 @@
 
 .actions p {
   @apply flex items-center gap-2 p-2 rounded-lg cursor-pointer text-base font-medium;
+}
+
+.unseenMessageCounter {
+  @apply flex items-center justify-start text-center size-5 rounded-full bg-primary text-primary-foreground text-xs font-semibold mr-2;
 }
