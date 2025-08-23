@@ -31,11 +31,10 @@ const Auth = () => {
     }
 
     login(currState === "Sign Up" ? "signup" : "login", {
-      fullName,
-      email,
-      password,
+      fullName: fullName.trim(),
+      email: email.toLowerCase().trim(),
+      password: password.trim(),
     });
-
   };
 
   return (

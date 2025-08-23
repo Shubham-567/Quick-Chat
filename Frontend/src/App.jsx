@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import Chat from "./pages/Chat/Chat";
-import ProfileUpdate from "./pages/ProfileUpdate/ProfileUpdate";
 import { AuthContext } from "./context/AuthContext";
 import { Toaster } from "react-hot-toast";
 import { useContext } from "react";
@@ -20,10 +19,6 @@ const App = () => {
         <Route
           path='/Auth'
           element={!authUser ? <Auth /> : <Navigate to='/' />}
-        />
-        <Route
-          path='/profile'
-          element={authUser ? <ProfileUpdate /> : <Navigate to='/Auth' />}
         />
         <Route path='*' element={<p>Not Found 404</p>} />
       </Routes>

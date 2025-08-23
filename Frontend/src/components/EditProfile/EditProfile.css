@@ -1,0 +1,101 @@
+@reference "../../index.css";
+
+.settings-section {
+  @apply flex-1 flex flex-col h-full p-4 sm:p-6 lg:p-8 overflow-y-auto max-h-screen;
+}
+
+.header-container {
+  @apply flex items-center gap-4 mb-4;
+}
+
+.header-container button {
+  @apply text-muted hover:text-primary transition-colors p-2 -ml-2 cursor-pointer;
+}
+
+.header-container .heading {
+  @apply text-2xl lg:text-3xl font-bold text-foreground;
+}
+
+.form-container {
+  @apply bg-card/20 rounded-xl border border-border divide-y divide-border;
+}
+
+.profile-container {
+  @apply p-6 sm:p-8 grid grid-cols-1 md:grid-cols-3 gap-6 items-start;
+}
+
+.settings-section .heading {
+  @apply text-lg font-semibold text-foreground;
+}
+
+.settings-section .description {
+  @apply text-sm text-muted mt-1;
+}
+
+.profile-container .upload {
+  @apply md:col-span-2 flex items-center gap-6;
+}
+
+.profile-container .upload .img-container {
+  @apply relative size-24 ring-2 ring-primary/40 rounded-full overflow-hidden cursor-pointer;
+}
+
+.profile-container .upload img {
+  @apply size-24 rounded-full object-cover bg-card;
+}
+
+.profile-container .upload .camera-overlay {
+  @apply absolute inset-0 flex items-center justify-center bg-black rounded-full opacity-0 hover:opacity-80 transition-opacity cursor-pointer;
+}
+
+.profile-container .upload .actions {
+  @apply flex flex-col gap-2;
+}
+
+.profile-container .upload .actions .change-btn {
+  @apply px-4 py-2 text-sm rounded-lg text-foreground bg-card hover:bg-card/80 transition-colors font-semibold;
+}
+
+.profile-container .upload .actions .cancel-btn {
+  @apply px-4 py-2 text-sm rounded-lg text-destructive/90 bg-transparent hover:bg-destructive/10 transition-colors font-semibold;
+}
+
+.info-container {
+  @apply p-6 sm:p-8 grid grid-cols-1 md:grid-cols-3 gap-6 items-start;
+}
+
+.info-container label {
+  @apply text-sm font-medium text-muted;
+}
+
+.info-container .name-input {
+  @apply w-full bg-background border border-border rounded-lg py-2.5 pl-11 pr-4 focus:outline-none focus:ring-2 focus:ring-primary transition-all placeholder:text-muted;
+}
+
+.info-container .disabled-input {
+  @apply w-full bg-card/50 border border-border/50 rounded-lg py-2.5 pl-11 pr-4 cursor-not-allowed text-card-foreground outline-none;
+}
+
+.info-container .input-icons {
+  @apply absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted;
+}
+
+.info-container .textarea {
+  @apply w-full bg-background border border-border rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-primary transition-all placeholder:text-muted resize-none;
+}
+
+.info-container .remaining-words {
+  @apply text-xs text-right text-muted;
+}
+
+.form-actions {
+  @apply flex justify-end gap-4 mt-6;
+}
+
+.form-actions .cancel-btn {
+  @apply px-6 py-2.5 rounded-lg text-foreground bg-card/30 hover:bg-muted/20 transition-colors font-semibold cursor-pointer;
+}
+
+.form-actions .submit-btn {
+  @apply px-6 py-2.5 rounded-lg bg-primary text-primary-foreground hover:opacity-80 transition-opacity font-semibold cursor-pointer;
+}

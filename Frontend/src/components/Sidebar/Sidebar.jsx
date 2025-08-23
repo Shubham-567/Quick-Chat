@@ -7,7 +7,7 @@ import { LogoIcon, UserIcon } from "../../lib/Icons";
 import { LogOut, MoreHorizontal, Search } from "lucide-react"; // todo: clean Up
 import assets from "../../assets/assets";
 
-function Sidebar() {
+function Sidebar({ showEditProfile }) {
   const { logout, onlineUsers, authUser } = useContext(AuthContext);
   const {
     getUsers,
@@ -70,7 +70,7 @@ function Sidebar() {
             <div className='option-menu'>
               <div className='current-user'>
                 <img
-                  src={authUser.profilePic || assets.profile_img}
+                  src={authUser.profilePic || assets.avatar_icon}
                   alt='Current User Profile'
                 />
                 <div>
@@ -88,15 +88,23 @@ function Sidebar() {
               <hr />
 
               <div className='actions'>
-                <p className='hover:bg-card'>
+                <button
+                  onClick={() => {
+                    showEditProfile();
+                    setIsMenuOpen(false);
+                  }}
+                  className='hover:bg-card'>
                   <UserIcon className='size-5 text-muted' /> Edit Profile
-                </p>
-                <p
-                  onClick={logout}
+                </button>
+                <button
+                  onClick={() => {
+                    logout();
+                    setIsMenuOpen(false);
+                  }}
                   className='hover:bg-destructive/10 group text-destructive'>
                   <LogOut className='size-5' />
                   Logout
-                </p>
+                </button>
               </div>
             </div>
           )}
@@ -117,6 +125,8 @@ function Sidebar() {
         </div>
       </div>
 
+      <hr className='divider' />
+
       <ul className='contacts'>
         {filteredUsers.map((user, index) => (
           <li
@@ -125,7 +135,7 @@ function Sidebar() {
             className={
               selectedUser && selectedUser._id === user._id
                 ? "border-primary bg-card"
-                : "border-border"
+                : "border-transparent"
             }>
             <div className='flex items-center gap-2'>
               <div className='contact-img'>

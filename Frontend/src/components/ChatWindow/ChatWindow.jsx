@@ -50,6 +50,8 @@ const ChatWindow = () => {
     if (selectedUser) {
       getMessages(selectedUser._id);
     }
+
+    setInput(""); // remove text from input box when selected user changes
   }, [selectedUser]);
 
   // scroll to new message
@@ -181,11 +183,14 @@ const ChatWindow = () => {
                   />
                 </div>
               </div>
-              <button
-                onClick={(e) => handleSendMessage(e)}
-                className='icon-btn group'>
-                <Send className='size-5 group-hover:text-primary-foreground' />
-              </button>
+
+              {input && (
+                <button
+                  onClick={(e) => handleSendMessage(e)}
+                  className='icon-btn group'>
+                  <Send className='size-5 group-hover:text-primary-foreground ' />
+                </button>
+              )}
             </div>
           </div>
           {isDetailsOpen && <DetailsPanel />}

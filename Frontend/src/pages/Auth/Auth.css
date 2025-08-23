@@ -5,7 +5,7 @@
 }
 
 .login-container {
-  @apply bg-primary/2 text-card-foreground md:flex justify-center items-center border-2 border-border rounded-2xl;
+  @apply text-card-foreground md:flex justify-center items-center border-2 border-border rounded-2xl bg-radial-[at_5%_15%] from-primary/10 via-primary/1 to-background;
 }
 
 .login-container .left,

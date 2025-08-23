@@ -27,8 +27,8 @@ const DetailsPanel = () => {
             <h3>{selectedUser.fullName}</h3>
             <p>{selectedUser.bio}</p>
           </div>
+          <p>Shared Media</p>
           <div className='media'>
-            <p>Shared Media</p>
             <div className='media-grid'>
               {msgImages.length > 0 &&
                 msgImages.map((img, i) => (
