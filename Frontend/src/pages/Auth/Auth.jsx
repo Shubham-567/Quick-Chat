@@ -26,6 +26,14 @@ const Auth = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    if (currState === "Sign Up" && fullName.trim() === "") {
+      return;
+    }
+
+    if (email.trim() === "" && password.trim() === "") {
+      return;
+    }
+
     if (isPending) {
       return;
     }
@@ -40,7 +48,7 @@ const Auth = () => {
   return (
     <section className='login'>
       <div className='login-container'>
-        <div className='left'>
+        <div className='left '>
           <h2>
             <LogoIcon className='text-primary size-10' />
             Quick Chat
@@ -134,7 +142,7 @@ const Auth = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <div
+                <button
                   className='show-pass'
                   onClick={() => setIsPassHidden(!isPassHidden)}>
                   {isPassHidden ? (
@@ -142,7 +150,7 @@ const Auth = () => {
                   ) : (
                     <EyeOffIcon className='size-5' />
                   )}
-                </div>
+                </button>
               </div>
             </div>
           </div>

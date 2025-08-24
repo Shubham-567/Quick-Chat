@@ -55,7 +55,11 @@ function Sidebar({ showEditProfile }) {
     <div className='sidebar'>
       <div className='sidebar-header'>
         <h1 className='logo'>
-          <LogoIcon className='size-6 text-primary' />
+          <img
+            src='/chat_app.svg'
+            alt='QuickChat Logo'
+            className='size-8 rounded-full'
+          />
           QuickChat
         </h1>
 

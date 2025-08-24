@@ -6,6 +6,8 @@ import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 import { Info, Paperclip, Send } from "lucide-react";
 import DetailsPanel from "../DetailsPanel/DetailsPanel";
+import Welcome from "../Welcome/Welcome";
+import ImageModal from "../ImageModal/ImageModal";
 
 const ChatWindow = () => {
   const { messages, selectedUser, sendMessage, getMessages } =
@@ -15,6 +17,19 @@ const ChatWindow = () => {
 
   const [input, setInput] = useState("");
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedImage(null);
+    setIsModalOpen(false);
+  };
 
   const chatContainerRef = useRef(null);
 
@@ -64,6 +79,10 @@ const ChatWindow = () => {
     }
   }, [messages]);
 
+  if (!selectedUser) {
+    return <Welcome />;
+  }
+
   return (
     <section className='flex items-start justify-end w-full'>
       {selectedUser && (
@@ -110,9 +129,17 @@ const ChatWindow = () => {
                               src={msg.image}
                               alt='image'
                               className='msg-img'
+                              onClick={() => handleImageClick(msg.image)}
                             />
                           ) : null}
                         </div>
+
+                        <ImageModal
+                          isOpen={isModalOpen}
+                          onClose={handleCloseModal}
+                          image={selectedImage}
+                        />
+
                         <p className='date'>
                           {new Date(msg.createdAt).toLocaleTimeString(
                             undefined,

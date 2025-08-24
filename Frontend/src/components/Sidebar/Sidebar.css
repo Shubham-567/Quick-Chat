@@ -1,7 +1,7 @@
 @reference "../../index.css";
 
 .sidebar {
-  @apply p-4 bg-card/40 min-h-screen w-1/4 border-r border-border max-h-screen;
+  @apply p-4 bg-card/40 min-h-screen md:w-1/4 border-r border-border max-h-screen;
 }
 
 .sidebar-header {
@@ -12,7 +12,7 @@
   @apply text-2xl font-semibold flex items-center gap-2;
 }
 
-.divider {
+.sidebar .divider {
   @apply border-t-3 border-border my-4;
 }
 .contacts {
