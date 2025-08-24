@@ -115,78 +115,77 @@ const ChatWindow = () => {
               />
             </div>
 
-            <ul className='chat-container' ref={chatContainerRef}>
-              {messages.reverse().map((msg) => (
-                <li key={msg._id}>
-                  {msg.senderId === authUser._id ? (
-                    <div className='outgoing-msg'>
-                      <div>
+            {messages.length > 0 ? (
+              <ul className='chat-container' ref={chatContainerRef}>
+                {messages.reverse().map((msg) => (
+                  <li key={msg._id}>
+                    {msg.senderId === authUser._id ? (
+                      <div className='outgoing-msg'>
                         <div>
-                          {msg.text ? (
-                            <p className='chat-bubble'>{msg.text}</p>
-                          ) : msg.image ? (
-                            <img
-                              src={msg.image}
-                              alt='image'
-                              className='msg-img'
-                              onClick={() => handleImageClick(msg.image)}
-                            />
-                          ) : null}
-                        </div>
+                          <div>
+                            {msg.text ? (
+                              <p className='chat-bubble'>{msg.text}</p>
+                            ) : msg.image ? (
+                              <img
+                                src={msg.image}
+                                alt='image'
+                                className='msg-img'
+                                onClick={() => handleImageClick(msg.image)}
+                              />
+                            ) : null}
+                          </div>
 
-                        <ImageModal
-                          isOpen={isModalOpen}
-                          onClose={handleCloseModal}
-                          image={selectedImage}
+                          <p className='date'>
+                            {new Date(msg.createdAt).toLocaleTimeString(
+                              undefined,
+                              {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                                hour12: true,
+                              }
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className='incoming-msg'>
+                        <img
+                          src={selectedUser.profilePic || assets.avatar_icon}
+                          alt={selectedUser.fullName}
+                          className='user-profile-img'
                         />
-
-                        <p className='date'>
-                          {new Date(msg.createdAt).toLocaleTimeString(
-                            undefined,
-                            {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                              hour12: true,
-                            }
-                          )}
-                        </p>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className='incoming-msg'>
-                      <img
-                        src={selectedUser.profilePic || assets.avatar_icon}
-                        alt={selectedUser.fullName}
-                        className='user-profile-img'
-                      />
-                      <div>
                         <div>
-                          {msg.text ? (
-                            <p className='chat-bubble'>{msg.text}</p>
-                          ) : msg.image ? (
-                            <img
-                              src={msg.image}
-                              alt='image'
-                              className='msg-img'
-                            />
-                          ) : null}
+                          <div>
+                            {msg.text ? (
+                              <p className='chat-bubble'>{msg.text}</p>
+                            ) : msg.image ? (
+                              <img
+                                src={msg.image}
+                                alt='image'
+                                className='msg-img'
+                                onClick={() => handleImageClick(msg.image)}
+                              />
+                            ) : null}
+                          </div>
+                          <p className='date'>
+                            {new Date(msg.createdAt).toLocaleTimeString(
+                              undefined,
+                              {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                                hour12: true,
+                              }
+                            )}
+                          </p>
                         </div>
-                        <p className='date'>
-                          {new Date(msg.createdAt).toLocaleTimeString(
-                            undefined,
-                            {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                              hour12: true,
-                            }
-                          )}
-                        </p>
                       </div>
-                    </div>
-                  )}
-                </li>
-              ))}
-            </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <Welcome noMessages />
+            )}
 
             <div className='chat-inputs'>
               <label className='icon-btn group'>
@@ -221,6 +220,12 @@ const ChatWindow = () => {
             </div>
           </div>
           {isDetailsOpen && <DetailsPanel />}
+
+          <ImageModal
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            image={selectedImage}
+          />
         </>
       )}
     </section>

@@ -1,3 +1,4 @@
+import "./ImageModal.css";
 import { Download, X } from "lucide-react";
 
 const ImageModal = ({ isOpen, onClose, image }) => {
@@ -16,30 +17,28 @@ const ImageModal = ({ isOpen, onClose, image }) => {
   };
 
   return (
-    <div className='fixed top-0 left-0 w-full h-full bg-black/6 flex justify-center items-center z-50'>
-      <div className='bg-background text-foreground rounded-2xl shadow-2xl p-4 max-w-lg w-full'>
-        <div className='flex justify-between items-center mb-4'>
+    <div className='image-modal'>
+      <div className='image-modal-content'>
+        <div className='image-modal-header'>
           <h2 className='text-2xl font-bold text-card-foreground'>
             Image Preview
           </h2>
-          <button
-            onClick={onClose}
-            className='text-muted hover:text-primary transition-colors cursor-pointer'>
+          <button onClick={onClose} className='image-modal-header-close'>
             <X className='size-6' />
           </button>
         </div>
-        <div className='flex flex-col items-center justify-center'>
+        <div className='image-modal-body'>
           <img
             src={image}
             alt='Selected Image'
-            className='w-full h-full object-contain rounded-2xl'
+            className='image-modal-body img'
           />
         </div>
-        <div className='flex justify-center items-center mt-4'>
+        <div className='image-modal-footer'>
           <button
             onClick={handleDownloadImage}
-            className='bg-primary text-primary-foreground font-medium py-2 px-4 rounded-lg transition-colors flex items-center cursor-pointer hover:bg-primary/80'>
-            <Download className='w-5 h-5 mr-2' />
+            className='image-modal-footer-download'>
+            <Download className='size-5 mr-2' />
             Download Image
           </button>
         </div>

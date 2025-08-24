@@ -1,0 +1,17 @@
+@reference "../../index.css";
+
+.welcome-container {
+  @apply flex flex-col items-center justify-center h-full p-4 text-foreground bg-background;
+}
+
+.welcome-header {
+  @apply text-3xl font-bold mb-4;
+}
+
+.welcome-text {
+  @apply text-lg text-muted mb-8;
+}
+
+.welcome-logo {
+  @apply size-20 rounded-full;
+}

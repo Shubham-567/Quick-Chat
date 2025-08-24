@@ -1,33 +1,33 @@
 @reference "../../index.css";
 
 .image-modal {
-  @apply fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center;
+  @apply fixed top-0 left-0 w-screen h-screen bg-black/80  flex justify-center items-center z-50;
 }
 
 .image-modal-content {
-  @apply relative bg-white rounded-lg shadow-lg w-full max-w-md;
+  @apply bg-background text-foreground rounded-2xl shadow-2xl p-4 max-w-lg w-full;
 }
 
 .image-modal-header {
-  @apply flex justify-between items-center p-4 border-b border-gray-200;
+  @apply flex justify-between items-center mb-4;
 }
 
 .image-modal-header-close {
-  @apply text-gray-400 hover:text-gray-500 transition duration-300;
+  @apply text-muted hover:text-primary transition-colors cursor-pointer;
 }
 
 .image-modal-body {
-  @apply p-4;
+  @apply flex flex-col items-center justify-center;
 }
 
 .image-modal-body img {
-  @apply w-full h-full object-contain;
+  @apply w-full h-full object-contain rounded-2xl;
 }
 
 .image-modal-footer {
-  @apply flex justify-between items-center p-4 border-t border-gray-200;
+  @apply flex justify-center items-center mt-4;
 }
 
 .image-modal-footer-download {
-  @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded;
+  @apply bg-primary text-primary-foreground font-medium py-2 px-4 rounded-lg transition-colors flex items-center cursor-pointer hover:bg-primary/80;
 }

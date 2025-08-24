@@ -25,7 +25,6 @@ const DetailsPanel = () => {
   };
 
   useEffect(() => {
-    console.log(messages);
     setMsgImages(messages.filter((msg) => msg.image).map((msg) => msg.image));
   }, [messages]);
 
