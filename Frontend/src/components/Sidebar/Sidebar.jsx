@@ -7,7 +7,7 @@ import { LogoIcon, UserIcon } from "../../lib/Icons";
 import { LogOut, MoreHorizontal, Search } from "lucide-react"; // todo: clean Up
 import assets from "../../assets/assets";
 
-function Sidebar({ showEditProfile }) {
+function Sidebar({ showEditProfile, isEditProfileOpen }) {
   const { logout, onlineUsers, authUser } = useContext(AuthContext);
   const {
     getUsers,
@@ -52,7 +52,10 @@ function Sidebar({ showEditProfile }) {
   }, [isMenuOpen]);
 
   return (
-    <div className='sidebar'>
+    <div
+      className={`${
+        isEditProfileOpen || selectedUser ? "hidden lg:flex" : "flex"
+      } sidebar`}>
       <div className='sidebar-header'>
         <h1 className='logo'>
           <img

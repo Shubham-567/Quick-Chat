@@ -20,7 +20,7 @@ const ImageModal = ({ isOpen, onClose, image }) => {
     <div className='image-modal'>
       <div className='image-modal-content'>
         <div className='image-modal-header'>
-          <h2 className='text-2xl font-bold text-card-foreground'>
+          <h2 className='text-xl md:text-2xl font-semibold text-card-foreground'>
             Image Preview
           </h2>
           <button onClick={onClose} className='image-modal-header-close'>

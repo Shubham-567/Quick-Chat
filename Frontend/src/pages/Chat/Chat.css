@@ -1,5 +1,1 @@
 @reference "../../index.css";
-
-.chat {
-  @apply min-h-screen w-full block md:flex;
-}

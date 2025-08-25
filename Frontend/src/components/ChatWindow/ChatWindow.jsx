@@ -4,13 +4,13 @@ import "./ChatWindow.css";
 import { ChatContext } from "../../context/ChatContext";
 import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
-import { Info, Paperclip, Send } from "lucide-react";
+import { ArrowLeft, Info, Paperclip, Send } from "lucide-react";
 import DetailsPanel from "../DetailsPanel/DetailsPanel";
 import Welcome from "../Welcome/Welcome";
 import ImageModal from "../ImageModal/ImageModal";
 
 const ChatWindow = () => {
-  const { messages, selectedUser, sendMessage, getMessages } =
+  const { messages, selectedUser, setSelectedUser, sendMessage, getMessages } =
     useContext(ChatContext);
 
   const { authUser, onlineUsers } = useContext(AuthContext);
@@ -90,6 +90,12 @@ const ChatWindow = () => {
           <div className='chat-window flex-grow'>
             <div className='chat-header'>
               <div className='left'>
+                <button
+                  className='text-muted hover:text-primary cursor-pointer'
+                  onClick={() => setSelectedUser(null)}>
+                  <ArrowLeft className='size-6' />
+                </button>
+
                 <img
                   src={selectedUser.profilePic || assets.avatar_icon}
                   alt={selectedUser.fullName + "profile pic"}
@@ -122,7 +128,7 @@ const ChatWindow = () => {
                     {msg.senderId === authUser._id ? (
                       <div className='outgoing-msg'>
                         <div>
-                          <div>
+                          <div className='flex justify-end items-end w-full'>
                             {msg.text ? (
                               <p className='chat-bubble'>{msg.text}</p>
                             ) : msg.image ? (
@@ -155,7 +161,7 @@ const ChatWindow = () => {
                           className='user-profile-img'
                         />
                         <div>
-                          <div>
+                          <div className='flex justify-end items-end w-full'>
                             {msg.text ? (
                               <p className='chat-bubble'>{msg.text}</p>
                             ) : msg.image ? (

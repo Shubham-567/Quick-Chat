@@ -48,11 +48,11 @@
 }
 
 .incoming-msg .chat-bubble {
-  @apply min-h-6 px-4 py-2 rounded-xl rounded-bl-none bg-card text-card-foreground;
+  @apply min-h-6 max-w-100 px-4 py-2 rounded-xl rounded-bl-none bg-card text-card-foreground;
 }
 
 .outgoing-msg .chat-bubble {
-  @apply min-h-6 px-4 py-2 rounded-xl rounded-br-none bg-primary text-primary-foreground;
+  @apply min-h-6 max-w-100 px-4 py-2 rounded-xl rounded-br-none bg-primary text-primary-foreground;
 }
 
 .msg-img {

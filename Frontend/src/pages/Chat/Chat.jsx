@@ -18,8 +18,9 @@ const Chat = () => {
   }, [selectedUser]);
 
   return (
-    <section className='chat'>
+    <section className='flex flex-col lg:flex-row'>
       <Sidebar
+        isEditProfileOpen={showEditProfile}
         showEditProfile={() => {
           setShowEditProfile(true);
           setSelectedUser(null);

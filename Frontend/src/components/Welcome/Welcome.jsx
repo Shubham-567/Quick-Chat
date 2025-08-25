@@ -7,7 +7,7 @@ const Welcome = ({ noMessages }) => {
 
   if (noMessages) {
     return (
-      <div className='welcome-container'>
+      <div className='welcome-container flex'>
         <h2 className='welcome-header'>No messages yet!</h2>
         <p className='welcome-text'>
           Start a conversation with {selectedUser.fullName} by sending a
@@ -18,7 +18,7 @@ const Welcome = ({ noMessages }) => {
   }
 
   return (
-    <div className='welcome-container'>
+    <div className='hidden lg:flex welcome-container'>
       <h2 className='welcome-header'>Welcome to QuickChat!</h2>
       <p className='welcome-text'>
         Select a user from the sidebar to start chatting.

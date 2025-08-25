@@ -5,7 +5,6 @@ import {
   GoogleIcon,
   LoadingIcon,
   LockIcon,
-  LogoIcon,
   MailIcon,
   UserIcon,
 } from "../../lib/Icons";
@@ -50,7 +49,7 @@ const Auth = () => {
       <div className='login-container'>
         <div className='left '>
           <h2>
-            <LogoIcon className='text-primary size-10' />
+            <img src='/chat_app.svg' alt='QuickChat Logo' className='size-10' />
             Quick Chat
           </h2>
           <p>
@@ -61,7 +60,11 @@ const Auth = () => {
         <div className='right'>
           <div className='mx-auto md:hidden'>
             <h2>
-              <LogoIcon className='text-primary size-8 md:size-10' />
+              <img
+                src='/chat_app.svg'
+                alt='QuickChat Logo'
+                className='size-10'
+              />
               Quick Chat
             </h2>
           </div>

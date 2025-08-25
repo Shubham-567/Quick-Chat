@@ -5,7 +5,7 @@
 }
 
 .image-modal-content {
-  @apply bg-background text-foreground rounded-2xl shadow-2xl p-4 max-w-lg w-full;
+  @apply bg-background text-foreground rounded-2xl shadow-2xl p-4 max-w-xs md:max-w-sm w-full;
 }
 
 .image-modal-header {
@@ -29,5 +29,5 @@
 }
 
 .image-modal-footer-download {
-  @apply bg-primary text-primary-foreground font-medium py-2 px-4 rounded-lg transition-colors flex items-center cursor-pointer hover:bg-primary/80;
+  @apply bg-primary text-primary-foreground text-sm font-medium py-2 px-4 rounded-lg transition-colors flex items-center cursor-pointer hover:bg-primary/80;
 }
