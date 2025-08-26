@@ -51,15 +51,12 @@ app.use("/api/auth", userRouter);
 app.use("/api/messages", messageRouter);
 
 // connect to mongodb
-connectDB();
+connectDB().catch((error) => {
+  console.error("DB connection error at startup: ", error);
+});
 
-if (process.env.NODE_ENV !== "production") {
-  const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
-  server.listen(PORT, () => {
-    console.log("Server is running on port: " + PORT);
-  });
-}
-
-// exporting server for vercel
-export default server;
+server.listen(PORT, () => {
+  console.log("Server is running on port: " + PORT);
+});
