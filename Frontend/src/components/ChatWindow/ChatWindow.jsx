@@ -72,10 +72,9 @@ const ChatWindow = () => {
   // scroll to new message
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTo({
-        top: chatContainerRef.current.scrollHeight,
-        behavior: "smooth",
-      });
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight -
+        chatContainerRef.current.clientHeight;
     }
   }, [messages]);
 
