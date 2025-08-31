@@ -3,7 +3,7 @@ import "./Sidebar.css";
 import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { ChatContext } from "../../context/ChatContext";
-import { LogoIcon, UserIcon } from "../../lib/Icons";
+import { UserIcon } from "../../lib/Icons";
 import { LogOut, MoreHorizontal, Search } from "lucide-react"; // todo: clean Up
 import assets from "../../assets/assets";
 
@@ -16,6 +16,7 @@ function Sidebar({ showEditProfile, isEditProfileOpen }) {
     selectedUser,
     unseenMessages,
     lastMessages,
+    sidebarLoading,
   } = useContext(ChatContext);
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -135,6 +136,16 @@ function Sidebar({ showEditProfile, isEditProfileOpen }) {
       <hr className='divider' />
 
       <ul className='contacts'>
+        {sidebarLoading && (
+          <p className='text-lg text-muted text-center mt-4'>Loading...</p>
+        )}
+
+        {searchQuery && filteredUsers.length === 0 && (
+          <p className='text-lg text-muted text-center mt-4'>
+            No results found.
+          </p>
+        )}
+
         {filteredUsers.map((user, index) => (
           <li
             key={index}

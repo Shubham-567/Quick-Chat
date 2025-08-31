@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [socket, setSocket] = useState(null);
   const [isPending, setIsPending] = useState(false);
+  const [authStatus, setAuthStatus] = useState("loading");
 
   // check if user is authenticated and if so set user data and connect to socket
   const checkAuth = async () => {
@@ -21,12 +22,15 @@ export const AuthProvider = ({ children }) => {
       const { data } = await axios.get("/api/auth/check");
 
       if (data.success) {
+        setAuthStatus("authenticated");
         setAuthUser(data.user);
         connectSocket(data.user);
+      } else {
+        setAuthStatus("unauthenticated");
       }
     } catch (error) {
       console.error(error.response.data.message);
-      // toast.error("Please login to your account");
+      setAuthStatus("unauthenticated");
     }
   };
 
@@ -116,6 +120,7 @@ export const AuthProvider = ({ children }) => {
     onlineUsers,
     socket,
     isPending,
+    authStatus,
     login,
     logout,
     updateProfile,

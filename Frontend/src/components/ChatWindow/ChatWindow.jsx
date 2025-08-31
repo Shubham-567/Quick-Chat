@@ -10,8 +10,14 @@ import Welcome from "../Welcome/Welcome";
 import ImageModal from "../ImageModal/ImageModal";
 
 const ChatWindow = () => {
-  const { messages, selectedUser, setSelectedUser, sendMessage, getMessages } =
-    useContext(ChatContext);
+  const {
+    messages,
+    selectedUser,
+    setSelectedUser,
+    sendMessage,
+    getMessages,
+    chatLoading,
+  } = useContext(ChatContext);
 
   const { authUser, onlineUsers } = useContext(AuthContext);
 
@@ -72,9 +78,10 @@ const ChatWindow = () => {
   // scroll to new message
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop =
-        chatContainerRef.current.scrollHeight -
-        chatContainerRef.current.clientHeight;
+      chatContainerRef.current.scrollTo({
+        top: chatContainerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
     }
   }, [messages]);
 
@@ -120,9 +127,15 @@ const ChatWindow = () => {
               />
             </div>
 
-            {messages.length > 0 ? (
+            {chatLoading ? (
+              <div className='flex justify-center items-center h-full'>
+                <h2 className='text-2xl font-medium text-muted animate-pulse'>
+                  Loading, Please wait...
+                </h2>
+              </div>
+            ) : messages.length > 0 ? (
               <ul className='chat-container' ref={chatContainerRef}>
-                {messages.reverse().map((msg) => (
+                {messages.map((msg) => (
                   <li key={msg._id}>
                     {msg.senderId === authUser._id ? (
                       <div className='outgoing-msg'>

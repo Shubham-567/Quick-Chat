@@ -10,12 +10,15 @@ export const ChatProvider = ({ children }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [unseenMessages, setUnseenMessages] = useState({});
   const [lastMessages, setLastMessages] = useState({});
+  const [chatLoading, setChatLoading] = useState(false);
+  const [sidebarLoading, setSidebarLoading] = useState(false);
 
   const { socket, axios } = useContext(AuthContext);
 
   // function to get all users for sidebar
   const getUsers = async () => {
     try {
+      setSidebarLoading(true);
       const { data } = await axios.get("/api/messages/users");
 
       if (data.success) {
@@ -25,19 +28,26 @@ export const ChatProvider = ({ children }) => {
       }
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setSidebarLoading(false);
     }
   };
 
   // function to get messages for selected user
   const getMessages = async (userId) => {
     try {
+      setChatLoading(true); // loading for initial messages
+
       const { data } = await axios.get(`/api/messages/${userId}`);
 
       if (data.success) {
         setMessages(data.messages);
+        console.log(data.messages);
       }
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setChatLoading(false);
     }
   };
 
@@ -84,6 +94,15 @@ export const ChatProvider = ({ children }) => {
         }));
       }
     });
+
+    // set chat loading
+    socket.on("connect", () => {
+      setChatLoading(false); // set chat loading to false when socket is connected
+    });
+
+    socket.on("disconnect", () => {
+      setChatLoading(true); // set chat loading to true when socket is disconnected
+    });
   };
 
   // function to unsubscribe from message
@@ -107,6 +126,7 @@ export const ChatProvider = ({ children }) => {
     selectedUser,
     unseenMessages,
     lastMessages,
+    chatLoading,
     getUsers,
     getMessages,
     sendMessage,

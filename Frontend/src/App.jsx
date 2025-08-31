@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Chat from "./pages/Chat/Chat";
 import { AuthContext } from "./context/AuthContext";
 import { Toaster } from "react-hot-toast";
@@ -6,20 +6,25 @@ import { useContext } from "react";
 import Auth from "./pages/Auth/Auth";
 
 const App = () => {
-  const { authUser } = useContext(AuthContext);
+  const { authStatus } = useContext(AuthContext);
+
+  if (authStatus === "loading") {
+    return (
+      <p className='flex justify-center items-center h-screen text-2xl text-muted text-center animate-pulse'>
+        Loading, Please wait...
+      </p>
+    );
+  }
+
+  if (authStatus === "unauthenticated") {
+    return <Auth />;
+  }
 
   return (
     <>
       <Toaster />
       <Routes>
-        <Route
-          path='/'
-          element={authUser ? <Chat /> : <Navigate to='/Auth' />}
-        />
-        <Route
-          path='/Auth'
-          element={!authUser ? <Auth /> : <Navigate to='/' />}
-        />
+        <Route path='/' element={<Chat />} />
         <Route path='*' element={<p>Not Found 404</p>} />
       </Routes>
     </>
