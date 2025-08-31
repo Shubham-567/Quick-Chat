@@ -71,11 +71,15 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("token", data.token);
 
         toast.success(data.message);
+
+        setAuthStatus("authenticated");
       } else {
         toast.error(data.message);
+        setAuthStatus("unauthenticated");
       }
     } catch {
       toast.success(error.message);
+      setAuthStatus("unauthenticated");
     } finally {
       setIsPending(false);
     }
@@ -89,6 +93,7 @@ export const AuthProvider = ({ children }) => {
     setOnlineUsers([]);
     axios.defaults.headers.common["token"] = null;
     toast.success("Logged out successfully");
+    setAuthStatus("unauthenticated");
     socket.disconnect();
   };
 

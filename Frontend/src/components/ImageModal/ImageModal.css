@@ -21,7 +21,7 @@
 }
 
 .image-modal-body img {
-  @apply w-full h-full object-contain rounded-2xl;
+  @apply w-full h-full max-h-[28rem] object-contain rounded-2xl;
 }
 
 .image-modal-footer {

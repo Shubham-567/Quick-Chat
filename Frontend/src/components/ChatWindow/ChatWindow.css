@@ -60,11 +60,11 @@
 }
 
 .incoming-msg .msg-img {
-  @apply bg-card rounded-2xl rounded-bl-none;
+  @apply bg-card rounded-2xl rounded-bl-none max-h-[28rem] object-contain;
 }
 
 .outgoing-msg .msg-img {
-  @apply bg-card rounded-2xl rounded-br-none;
+  @apply bg-card rounded-2xl rounded-br-none max-h-[28rem] object-contain;
 }
 
 .chat-inputs {

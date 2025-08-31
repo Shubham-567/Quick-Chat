@@ -16,15 +16,16 @@ const App = () => {
     );
   }
 
-  if (authStatus === "unauthenticated") {
-    return <Auth />;
-  }
+  // fix the auth page issue
 
   return (
     <>
       <Toaster />
       <Routes>
-        <Route path='/' element={<Chat />} />
+        <Route
+          path='/'
+          element={authStatus === "unauthenticated" ? <Auth /> : <Chat />}
+        />
         <Route path='*' element={<p>Not Found 404</p>} />
       </Routes>
     </>
