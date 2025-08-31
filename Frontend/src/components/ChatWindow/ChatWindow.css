@@ -29,7 +29,7 @@
 }
 
 .chat-container {
-  @apply flex flex-col gap-4 p-4 text-sm h-[545px] grow overflow-y-auto;
+  @apply flex flex-col-reverse gap-4 p-4 text-sm h-[545px] grow overflow-y-auto;
 }
 
 .chat-container .date {
