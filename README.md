@@ -1,25 +1,27 @@
-# 🚀 QuickChat
+# QuickChat
 
 A full-stack, real-time chat application built with the MERN stack (MongoDB, Express, React, Node.js) and Socket.IO.
 
-## 🚀 Live Demo
+> **Note**: This Project was built for learning purposes. It is not intended for production use.
+
+## Live Demo
 
 Check out the live version of QuickChat here: [https://quick-chat-site.vercel.app](https://quick-chat-site.vercel.app)
 
 ### Screenshot
 
-![QuickChat Demo](.\Frontend\public\QuickChat-Screenshot.png)
+![QuickChat Demo](./Frontend/public/QuickChat-Screenshot.png)
 
-## ✨ Features
+## Features
 
-- **Real-time Messaging** 💬: Instantly send and receive messages with Socket.IO.
-- **User Authentication** 🔐: Secure user signup and login using JSON Web Tokens (JWT).
-- **Image Sharing** 🖼️: Upload and share images with Cloudinary integration.
-- **Responsive UI** 📱: A clean and modern user interface built with React and Tailwind CSS.
+- **Real-time Messaging**: Instantly send and receive messages with Socket.IO.
+- **User Authentication**: Secure user signup and login using JSON Web Tokens (JWT).
+- **Image Sharing**: Upload and share images with Cloudinary integration.
+- **Responsive UI**: A clean and modern user interface built with React and Tailwind CSS.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Backend
 
@@ -39,7 +41,7 @@ Check out the live version of QuickChat here: [https://quick-chat-site.vercel.ap
 
 ---
 
-## 🏁 Getting Started
+## Getting Started
 
 Follow these steps to get the project running on your local machine.
 
@@ -64,15 +66,16 @@ Follow these steps to get the project running on your local machine.
     - Navigate to the backend folder: `cd Backend`
     - Install dependencies: `npm install`
     - Create a `.env` file and add the following variables:
+
       ```env
       MONGODB_URI=your_mongodb_connection_string
 
       JWT_SECRET=your_super_secret_key
-      
+
       CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-      
+
       CLOUDINARY_API_KEY=your_cloudinary_api_key
-      
+
       CLOUDINARY_API_SECRET=your_cloudinary_api_secret
       ```
 
@@ -106,6 +109,6 @@ Your application should now be running! Open your browser and go to `http://loca
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
