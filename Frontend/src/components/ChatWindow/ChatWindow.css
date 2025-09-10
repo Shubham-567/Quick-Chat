@@ -1,7 +1,7 @@
 @reference "../../index.css";
 
 .chat-window {
-  @apply bg-background text-foreground flex flex-col justify-between min-h-screen gap-2;
+  @apply bg-background text-foreground flex-col justify-between min-h-screen gap-2;
 }
 
 .chat-header {
@@ -13,7 +13,7 @@
 }
 
 .chat-header img {
-  @apply size-12 rounded-full;
+  @apply size-10 rounded-full;
 }
 
 .chat-header .name {
@@ -48,23 +48,23 @@
 }
 
 .incoming-msg .chat-bubble {
-  @apply min-h-6 max-w-100 px-4 py-2 rounded-xl rounded-bl-none bg-card text-card-foreground;
+  @apply min-h-6 max-w-100 mr-30 px-4 py-2 rounded-xl rounded-bl-none bg-card text-card-foreground;
 }
 
 .outgoing-msg .chat-bubble {
-  @apply min-h-6 max-w-100 px-4 py-2 rounded-xl rounded-br-none bg-primary text-primary-foreground;
+  @apply min-h-6 max-w-100 ml-30 px-4 py-2 rounded-xl rounded-br-none bg-primary text-primary-foreground;
 }
 
 .msg-img {
-  @apply max-w-100 min-w-100 min-h-50 h-full aspect-auto p-2 bg-card;
+  @apply size-full max-h-[22rem] sm:max-h-[28rem] max-w-9/10 aspect-auto p-2 bg-card;
 }
 
 .incoming-msg .msg-img {
-  @apply bg-card rounded-2xl rounded-bl-none max-h-[28rem] object-contain;
+  @apply bg-card rounded-2xl rounded-bl-none object-contain;
 }
 
 .outgoing-msg .msg-img {
-  @apply bg-card rounded-2xl rounded-br-none max-h-[28rem] object-contain;
+  @apply bg-card rounded-2xl rounded-br-none object-contain;
 }
 
 .chat-inputs {

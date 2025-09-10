@@ -1,11 +1,11 @@
 @reference "../../index.css";
 
 .image-modal {
-  @apply fixed top-0 left-0 w-screen h-screen bg-black/80  flex justify-center items-center z-50;
+  @apply fixed top-0 left-0 w-screen h-screen bg-black/80 flex justify-center items-center z-50;
 }
 
 .image-modal-content {
-  @apply bg-background text-foreground rounded-2xl shadow-2xl p-4 max-w-xs md:max-w-sm w-full;
+  @apply bg-background text-foreground rounded-2xl shadow-2xl p-4 max-w-xs md:max-w-sm;
 }
 
 .image-modal-header {
@@ -21,7 +21,7 @@
 }
 
 .image-modal-body img {
-  @apply w-full h-full max-h-[28rem] object-contain rounded-2xl;
+  @apply size-full max-h-[22rem] object-contain rounded-2xl;
 }
 
 .image-modal-footer {

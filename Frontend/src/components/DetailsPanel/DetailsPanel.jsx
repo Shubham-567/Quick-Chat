@@ -3,10 +3,10 @@ import assets from "../../assets/assets";
 import "./DetailsPanel.css";
 import { ChatContext } from "../../context/ChatContext";
 import { AuthContext } from "../../context/AuthContext";
-import { LogOut } from "lucide-react";
+import { ArrowLeft, LogOut } from "lucide-react";
 import ImageModal from "../ImageModal/ImageModal";
 
-const DetailsPanel = () => {
+const DetailsPanel = ({ isDetailsOpen, onDetailsClose }) => {
   const { selectedUser, messages } = useContext(ChatContext);
   const { logout } = useContext(AuthContext);
   const [msgImages, setMsgImages] = useState([]);
@@ -32,6 +32,13 @@ const DetailsPanel = () => {
     <>
       {selectedUser && (
         <div className='details'>
+          <div className='flex items-center gap-4 pb-2 mb-2 border-b border-border sm:hidden'>
+            <button onClick={onDetailsClose}>
+              <ArrowLeft className='text-muted hover:text-primary size-6' />
+            </button>
+            <h3 className='text-lg font-semibold'>Contact Details</h3>
+          </div>
+
           <div className='profile'>
             <img
               src={selectedUser?.profilePic || assets.avatar_icon}

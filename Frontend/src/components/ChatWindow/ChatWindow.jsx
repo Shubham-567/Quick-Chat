@@ -93,7 +93,10 @@ const ChatWindow = () => {
     <section className='flex items-start justify-end w-full'>
       {selectedUser && (
         <>
-          <div className='chat-window flex-grow'>
+          <div
+            className={`${
+              isDetailsOpen ? "max-sm:hidden" : "flex"
+            } flex-grow chat-window`}>
             <div className='chat-header'>
               <div className='left'>
                 <button
@@ -173,7 +176,7 @@ const ChatWindow = () => {
                           className='user-profile-img'
                         />
                         <div>
-                          <div className='flex justify-end items-end w-full'>
+                          <div className='flex justify-start items-end w-full'>
                             {msg.text ? (
                               <p className='chat-bubble'>{msg.text}</p>
                             ) : msg.image ? (
@@ -237,7 +240,13 @@ const ChatWindow = () => {
               )}
             </div>
           </div>
-          {isDetailsOpen && <DetailsPanel />}
+
+          {isDetailsOpen && (
+            <DetailsPanel
+              isDetailsOpen={isDetailsOpen}
+              onDetailsClose={() => setIsDetailsOpen(!isDetailsOpen)}
+            />
+          )}
 
           <ImageModal
             isOpen={isModalOpen}

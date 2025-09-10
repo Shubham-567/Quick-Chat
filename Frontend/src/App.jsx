@@ -16,7 +16,7 @@ const App = () => {
     );
   }
 
-  // fix the auth page issue
+  // todo: add sidebar loading it's not working right now
 
   return (
     <>
