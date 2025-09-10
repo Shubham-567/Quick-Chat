@@ -140,9 +140,9 @@ function Sidebar({ showEditProfile, isEditProfileOpen }) {
           <p className='text-lg text-muted text-center mt-4'>Loading...</p>
         )}
 
-        {searchQuery && filteredUsers.length === 0 && (
+        {filteredUsers.length === 0 && (
           <p className='text-lg text-muted text-center mt-4'>
-            No results found.
+            {searchQuery ? "No results found" : "No user found"}.
           </p>
         )}
 

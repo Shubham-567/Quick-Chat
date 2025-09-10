@@ -21,6 +21,8 @@ export const ChatProvider = ({ children }) => {
       setSidebarLoading(true);
       const { data } = await axios.get("/api/messages/users");
 
+      console.log(data.unseenMessages);
+
       if (data.success) {
         setUsers(data.users);
         setUnseenMessages(data.unseenMessages);
